@@ -1,4 +1,6 @@
-![](https://img.shields.io/npm/v/@akr4/gatsby-plugin-og-image)
+# @akr4/gatsby-plugin-og-image
+
+[![](https://img.shields.io/npm/v/@akr4/gatsby-plugin-og-image)](https://www.npmjs.com/package/@akr4/gatsby-plugin-og-image)
 
 ## Description
 
