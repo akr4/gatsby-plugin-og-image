@@ -7,6 +7,8 @@ const isEqual = require('lodash.isequal');
 
 const PLUGIN_NAME = '@akr4/gatsby-plugin-og-image';
 const OG_IMAGE_DIR = './public/og-image';
+const DEFAULT_WIDTH = 1200;
+const DEFAULT_HEIGHT = 630;
 
 let browser;
 let jobQueue;
@@ -25,7 +27,7 @@ const checkConfig = (reporter, siteUrl, render) => {
   readyToRun = true;
 };
 
-exports.onPreInit = async ({ reporter }, { siteUrl, render, concurrency = 3, width = 1200, height = 630 }) => {
+exports.onPreInit = async ({ reporter }, { siteUrl, render, concurrency = 3, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT }) => {
   checkConfig(reporter, siteUrl, render);
   if (!readyToRun) {
     return;
@@ -60,7 +62,7 @@ exports.onPostBuild = async () => {
   await browser.close();
 };
 
-exports.onCreatePage = async ({ page, cache, reporter, actions }, { siteUrl, render }) => {
+exports.onCreatePage = async ({ page, cache, reporter, actions }, { siteUrl, render, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT}) => {
   if (!readyToRun) {
     return;
   }
@@ -92,6 +94,8 @@ exports.onCreatePage = async ({ page, cache, reporter, actions }, { siteUrl, ren
   const newContext = {
     ...page.context,
     ogImageUrl,
+    ogImageWidth: width,
+    ogImageHeight: height,
   };
   delete newContext.ogImagePlugin;
 
