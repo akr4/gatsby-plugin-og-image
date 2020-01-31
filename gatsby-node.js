@@ -5,12 +5,32 @@ const { removeTrailingSlash } = require('./utils');
 const async = require('async');
 const isEqual = require('lodash.isequal');
 
+const PLUGIN_NAME = '@akr4/gatsby-plugin-og-image';
 const OG_IMAGE_DIR = './public/og-image';
 
 let browser;
 let jobQueue;
+let readyToRun = false;
 
-exports.onPreInit = async ({ reporter }, { concurrency = 3, width = 1200, height = 630 }) => {
+const checkConfig = (reporter, siteUrl, render) => {
+  if (!siteUrl) {
+    reporter.error(`${PLUGIN_NAME}: no siteUrl option in the plugin config`);
+    return;
+  }
+  if (!render) {
+    reporter.error(`${PLUGIN_NAME}: no render option in the plugin config`);
+    return;
+  }
+
+  readyToRun = true;
+};
+
+exports.onPreInit = async ({ reporter }, { siteUrl, render, concurrency = 3, width = 1200, height = 630 }) => {
+  checkConfig(reporter, siteUrl, render);
+  if (!readyToRun) {
+    return;
+  }
+
   browser = await puppeteer.launch();
 
   const run = async ({ html, path }, callback) => {
@@ -33,10 +53,18 @@ exports.onPreInit = async ({ reporter }, { concurrency = 3, width = 1200, height
 };
 
 exports.onPostBuild = async () => {
+  if (!readyToRun) {
+    return;
+  }
+
   await browser.close();
 };
 
-exports.onCreatePage = async ({ page, cache, actions }, { siteUrl, render }) => {
+exports.onCreatePage = async ({ page, cache, reporter, actions }, { siteUrl, render }) => {
+  if (!readyToRun) {
+    return;
+  }
+
   const { createPage, deletePage } = actions;
   const ogImagePluginContext = page.context.ogImagePlugin;
 
