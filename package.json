@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-plugin-og-image",
+  "name": "@akr4/gatsby-plugin-og-image",
   "version": "1.0.2",
   "author": "Ueda, Akira <ue@gol.com>",
   "license": "MIT",
@@ -17,5 +17,15 @@
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "lint": "eslint --fix \"**/*.{js,jsx}\""
-  }
+  },
+  "description": "Generates images for og:image for pages and set `<meta property=\"og:image\">` in your HTML statically and dynamically. During build time, Headless Chrome renders your template HTML and makes the images.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akr4/gatsby-plugin-og-image.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akr4/gatsby-plugin-og-image/issues"
+  },
+  "homepage": "https://github.com/akr4/gatsby-plugin-og-image#readme"
 }
