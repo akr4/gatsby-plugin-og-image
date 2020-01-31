@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { removeTrailingSlash } = require('./utils');
 const async = require('async');
+const isEqual = require('lodash.isequal');
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -38,7 +39,7 @@ exports.onPostBuild = async () => {
   await browser.close();
 };
 
-exports.onCreatePage = async ({ page, actions }, { siteUrl, render }) => {
+exports.onCreatePage = async ({ page, cache, actions }, { siteUrl, render }) => {
   const { createPage, deletePage } = actions;
   const ogImagePluginContext = page.context.ogImagePlugin;
 
@@ -50,12 +51,14 @@ exports.onCreatePage = async ({ page, actions }, { siteUrl, render }) => {
 
   const ogImagePath = path.join(OG_IMAGE_DIR, removeTrailingSlash(page.path) + '.png');
 
-  if (fs.existsSync(ogImagePath)) {
+  const cachedContext = await cache.get(page.path);
+  if (isEqual(cachedContext, ogImagePluginContext)) {
     return;
   }
 
   fs.mkdirSync(path.dirname(ogImagePath), { recursive: true });
   await createOgImage(html, ogImagePath);
+  await cache.set(page.path, ogImagePluginContext);
 
   const ogImageUrl = removeTrailingSlash(siteUrl) + '/og-image' + removeTrailingSlash(page.path) + '.png';
 
