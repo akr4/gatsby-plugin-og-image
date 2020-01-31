@@ -5,22 +5,19 @@ const { removeTrailingSlash } = require('./utils');
 const async = require('async');
 const isEqual = require('lodash.isequal');
 
-const WIDTH = 1200;
-const HEIGHT = 630;
-
 const OG_IMAGE_DIR = './public/og-image';
 
 let browser;
 let jobQueue;
 
-exports.onPreInit = async ({ reporter }, { concurrency }) => {
+exports.onPreInit = async ({ reporter }, { concurrency = 3, width = 1200, height = 630 }) => {
   browser = await puppeteer.launch();
 
   const run = async ({ html, path }, callback) => {
     let page;
     try {
       page = await browser.newPage();
-      await page.setViewport({ width: WIDTH, height: HEIGHT });
+      await page.setViewport({ width, height });
       await page.setContent(html);
       await page.screenshot({ path });
       reporter.info(`wrote og:image to ${path}`);

@@ -27,11 +27,13 @@ module.exports = {
 };
 ```
 
-| property    | description                                                                                  |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| siteUrl     | your site URL                                                                                |
-| render      | a function to render og:image that takes `ogImagePlugin` property value in the page context. |
-| concurrency | the number of instances of Headless Chrome                                                   |
+| property    | default | description                                                                                  |
+| ----------- | ------- | -------------------------------------------------------------------------------------------- |
+| siteUrl     |         | your site URL                                                                                |
+| render      |         | a function to render og:image that takes `ogImagePlugin` property value in the page context. |
+| concurrency | 3       | the number of instances of Headless Chrome                                                   |
+| width       | 1200    | view port width of Headless Chrome                                                           |
+| height      | 630     | view port height of Headless Chrome                                                          |
 
 The following is an example `render` function. It takes `title` and render it at the center of the page.
 
