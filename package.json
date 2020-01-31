@@ -3,6 +3,10 @@
   "version": "1.0.2",
   "author": "Ueda, Akira <ue@gol.com>",
   "license": "MIT",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin"
+  ],
   "dependencies": {
     "async": "^3.1.1",
     "puppeteer": "^2.1.0",
