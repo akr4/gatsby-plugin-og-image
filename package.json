@@ -1,0 +1,21 @@
+{
+  "name": "gatsby-plugin-og-image",
+  "version": "1.0.1",
+  "author": "Ueda, Akira <ue@gol.com>",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^3.1.1",
+    "puppeteer": "^2.1.0",
+    "react-helmet": "^5.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-react": "^7.18.0",
+    "prettier": "^1.19.1"
+  },
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "lint": "eslint --fix \"**/*.{js,jsx}\""
+  }
+}
