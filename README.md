@@ -1,3 +1,5 @@
+![](https://img.shields.io/npm/v/@akr4/gatsby-plugin-og-image)
+
 ## Description
 
 Generates images for og:image for pages and set `<meta property="og:image">` in your HTML statically and dynamically. During build time, Headless Chrome renders your template HTML and makes the images.
