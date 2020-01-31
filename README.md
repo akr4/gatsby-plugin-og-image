@@ -17,7 +17,7 @@ npm install @akr4/gatsby-plugin-og-image
 ```javascript:title=gatsby-config.js
 module.exports = {
   plugins: [{
-    resolve: `gatsby-plugin-og-image`,
+    resolve: `@akr4/gatsby-plugin-og-image`,
     options: {
       siteUrl: `https://example.com`,
       render: renderOgImage,
