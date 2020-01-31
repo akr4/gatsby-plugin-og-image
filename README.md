@@ -2,6 +2,10 @@
 
 Generates images for og:image for pages and set `<meta property="og:image">` in your HTML statically and dynamically. During build time, Headless Chrome renders your template HTML and makes the images.
 
+The image below is an example.
+
+![example og:image](https://raw.githubusercontent.com/akr4/static-files/94f490d72eeef6fed80d35e1f1675140241647ec/gatsby-plugin-og-image/example-og-image.png)
+
 ## How to install
 
 ```
@@ -10,7 +14,7 @@ npm install @akr4/gatsby-plugin-og-image
 
 ## Examples of usage
 
-```javascript
+```javascript:title=gatsby-config.js
 module.exports = {
   plugins: [{
     resolve: `gatsby-plugin-og-image`,
@@ -61,7 +65,7 @@ const renderOgImage = ({ title }) => {
 };
 ```
 
-The `title` argument comes from the `ogImagePlugin` property of the page context. For example, it is configured by `createPage`.
+The `title` argument comes from the `ogImagePlugin` property of the page context. For example, you can configure it by `createPage`.
 
 ```javascript
 createPage({
@@ -79,7 +83,7 @@ You can set whatever you want to `ogImagePlugin` property and use them in the `r
 
 The following function is an example of how to configure when the source is markdown.
 
-```javascript
+```javascript:title=gatsby-node.js
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
