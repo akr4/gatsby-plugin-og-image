@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-og-image",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Ueda, Akira <ue@gol.com>",
   "license": "MIT",
   "dependencies": {

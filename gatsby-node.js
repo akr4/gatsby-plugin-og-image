@@ -49,6 +49,11 @@ exports.onCreatePage = async ({ page, actions }, { siteUrl, render }) => {
   const html = render(ogImagePluginContext);
 
   const ogImagePath = path.join(OG_IMAGE_DIR, removeTrailingSlash(page.path) + '.png');
+
+  if (fs.existsSync(ogImagePath)) {
+    return;
+  }
+
   fs.mkdirSync(path.dirname(ogImagePath), { recursive: true });
   await createOgImage(html, ogImagePath);
 
